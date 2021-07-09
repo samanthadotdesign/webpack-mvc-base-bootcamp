@@ -5,7 +5,7 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   entry: {
-    main: './src/index.js',
+    main: './src/index.jsx',
   },
   mode: 'development',
   devtool: 'inline-source-map',
@@ -18,7 +18,7 @@ module.exports = merge(common, {
         use: {
           loader: require.resolve('babel-loader'),
           options: {
-            presets: ['@babel/preset-env'],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
