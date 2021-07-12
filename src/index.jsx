@@ -4,52 +4,40 @@ import { render } from 'react-dom';
 import moment from 'moment';
 
 // Convert into objects from raw JSON so we don't need JSON.parse()
-import file from './pokemon-example.json';
+// Object of objects
+import data from './pokemon.json';
 
-console.log(file)
+console.log(data);
+const pokemonKeys = Object.keys(data);
 
-// const jsxListItems = file.map(
-//   (pokemon) => (
-//     <li key={item.id} className="item">
-//       <p>
-//         id:
-//         {item.id}
-//       </p>
-//       <p>
-//         name:
-//         {item.name}
-//       </p>
-//       <p>
-//         description:
-//         {item.description}
-//       </p>
-//       <p>
-//         created:
-//         {moment(item.createdAt).fromNow()}
-//       </p>
-//       <p>
-//         updated:
-//         {moment(item.updatedAt).fromNow()}
-//       </p>
-//     </li>
-//   ),
-// );
-// console.log(jsxListItems);
+const pokemonNames = [];
+// Getting the names of the pokemon
+for (let index = 0; index < 20; index += 1) {
+  pokemonNames.push(pokemonKeys[index]);
+}
 
-// const myEl = (
-//   <div>
-//     <h1 className="hero-text">
-//       Hello World
-//     </h1>
-//     <ul>
-//       {jsxListItems}
-//     </ul>
-//   </div>
-// );
+// Pokemon Component
+function Pokemon({ name }) {
+  return (
+    <div>
+      <h1>{ name }</h1>
+    </div>
+  );
+}
 
-// /* This appends all our created elements to the page */
-// const rootElement = document.createElement('div');
-// document.body.appendChild(rootElement);
+// For every pokemon in the list, create a component with the pokemon name
+// Using the prop here to change the pokemon name
+const pokemonItems = pokemonKeys.map((pokemon) => <Pokemon name={pokemon} />);
 
-// // Render the myEl JSX element into the root element with React.
-// render(myEl, rootElement);
+const myEl = (
+  <div>
+    {pokemonItems}
+  </div>
+);
+
+/* This appends all our created elements to the page */
+const rootElement = document.createElement('div');
+document.body.appendChild(rootElement);
+
+// Render the myEl JSX element into the root element with React.
+render(myEl, rootElement);
